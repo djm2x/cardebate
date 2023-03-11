@@ -1,0 +1,40 @@
+<div class="container mb-2" style="margin-top: 65px;">
+    {{myForm.value | json}}
+    {{myForm.status | json}}
+  <form [formGroup]="myForm" (ngSubmit)="compare(myForm)">
+    <div class="row">
+      <div class="ml-3">
+        <mat-form-field>
+          <mat-select placeholder="Marque" formControlName="idMarque" (selectionChange)="marqueChange($event.value)">
+            <mat-option value="">...</mat-option>
+            <mat-option *ngFor="let o of marques | async" [value]="o.id">{{o.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+          <mat-select placeholder="Model" formControlName="idModel">
+            <!-- (selectionChange)="modelChange($event.value)" -->
+            <mat-option value="">...</mat-option>
+            <mat-option *ngFor="let o of models" [value]="o.id">{{o.id}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      &nbsp;
+      <div class="ml-3 mt-3">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid">Comparer</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div [ngClass]="{'col-md-12': !modelToCompare, 'col-md-6' : modelToCompare}">
+      <app-compare [events]="eventsSubject.asObservable()" [mainModel]="mainModel"></app-compare>
+    </div>
+    <div *ngIf="modelToCompare" class="col-md-6">
+      <app-compare [events]="eventsSubject2.asObservable()" [mainModel]="modelToCompare" [modelToCompare]="mainModel">
+      </app-compare>
+    </div>
+  </div>
+</div>

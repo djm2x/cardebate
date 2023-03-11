@@ -1,0 +1,44 @@
+<div>
+  <div class="img1" [ngStyle]="{'background-image': 'url(' + img + ')'}">
+    <div class="h1">
+      <h1>{{titre}}</h1>
+      <mat-icon style="font-size: 40px;">keyboard_arrow_down</mat-icon>
+    </div>
+  </div>
+</div>
+<div class="container mt-2">
+  <!-- style="min-width: 150px;max-width: 250px; margin-bottom: 5%;padding: 0;border-radius: 0;" -->
+  <div class="row text-center">
+    <div class="col s12 m4" *ngFor="let o of list; let i = index">
+      <mat-card class="example-card block" style="min-width: 150px;max-width: 250px; margin-bottom: 5%;padding: 0;">
+        <ng-container *ngIf="!o.id; else elseTemplate">
+            <div class="image"></div>
+            <mat-card-content class="text-center">
+              <div class="text pt-1 pb-1 pr-3">
+                <div class="text-line"> </div>
+                <div class="text-line"></div>
+              </div>
+            </mat-card-content>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <a [routerLink]="['/home/model', o.id]">
+              <app-img-display [img]="o.imageUrl"></app-img-display>
+            </a>
+            <mat-card-content class="text-center ml-2 mb-1">
+              <!-- <hr>
+              <p class="card-text mb-1">{{o.nom}}</p>
+              {{o.dateLastRead | date:"dd/M/yy HH:mm"}}&nbsp;<i class="fas fa-book-reader"></i>
+              <span class="ml-2 mr-2">-</span>
+              {{o.countRead}}&nbsp;<i class="far fa-eye"></i> -->
+            </mat-card-content>
+            <!-- <mat-card-actions></mat-card-actions> -->
+        </ng-template>
+        
+      </mat-card>
+      
+    </div>
+  </div>
+
+  <mat-paginator class="mt-2" color="primary" [length]="resultsLength" [pageSizeOptions]="[6, 12, 24, 48]" showFirstLastButtons></mat-paginator>
+
+</div>

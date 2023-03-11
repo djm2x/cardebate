@@ -1,0 +1,84 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Model : {{mainModel.id}}</mat-card-title>
+      <mat-card-subtitle>
+        Annee {{mainModel.annee}}
+        <span [style.color]="colorise(model.annee).color">{{colorise(model.annee).value}}</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <app-carousel>
+        <ng-container *ngFor="let item of mainModel.modelImgs">
+          <ng-container *appCarouselItem>
+            <!-- <div class="item">{{ item.imageUrl }}</div> -->
+            <img class="item" style="width:350px; height:auto" [src]="item.imageUrl">
+
+            <!-- <div class="tile" style="min-height: 200px" [ngStyle]="{'background-image': 'url(' + item.imageUrl + ')'}"></div> -->
+          </ng-container>
+        </ng-container>
+      </app-carousel>
+      <mat-divider></mat-divider>
+      <div class="row justify-content-center mt-2 mb-2">
+        <div class="col-md-5">
+          <div class="example-element-description">
+            
+            <h5>
+              puissance : {{mainModel.puissance}} 
+              <span [style.color]="colorise(model.puissance).color">{{colorise(model.puissance).value}}</span>
+            </h5>
+            <h5>reservoir : {{mainModel.reservoir}}
+                <span [style.color]="colorise(model.reservoir).color">{{colorise(model.reservoir).value}}</span>
+            </h5>
+            <h5>boiteVitesse : {{mainModel.boiteVitesse}}
+                <span [style.color]="colorise(model.boiteVitesse).color">{{colorise(model.boiteVitesse).value}}</span>
+            </h5>
+            <h5>freinageUrgence : {{mainModel.freinageUrgence}}
+              <span [style.color]="colorise(model.freinageUrgence).color">{{colorise(model.freinageUrgence).value}}</span>
+            </h5>
+          </div>
+          <mat-divider [inset]="true"></mat-divider>
+          <div class="mt-2">
+            <h5>vitesseMax : {{mainModel.vitesseMax}}
+              <span [style.color]="colorise(model.vitesseMax).color">{{colorise(model.vitesseMax).value}}</span>
+            </h5>
+            <h5>poid : {{mainModel.poid}}
+              <span [style.color]="colorise(model.poid).color">{{colorise(model.poid).value}}</span>
+            </h5>
+            <h5>prix : {{mainModel.prix}}
+              <span [style.color]="colorise(model.prix).color">{{colorise(model.prix).value}}</span>
+            </h5>
+            <h5>autonomie : {{mainModel.autonomie}}
+              <span [style.color]="colorise(model.autonomie).color">{{colorise(model.autonomie).value}}</span>
+            </h5>
+          </div>
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+        <div class="col-md-5">
+          <div class="example-element-description">
+            <h5>consVille : {{mainModel.consVille}}
+              <span [style.color]="colorise(model.consVille).color">{{colorise(model.consVille).value}}</span>
+            </h5>
+            <h5>consRoute : {{mainModel.consRoute}}
+              <span [style.color]="colorise(model.consRoute).color">{{colorise(model.consRoute).value}}</span>
+            </h5>
+            <h5>consAutoroute : {{mainModel.consAutoroute}}
+              <span [style.color]="colorise(model.consAutoroute).color">{{colorise(model.consAutoroute).value}}</span>
+            </h5>
+            <h5>cc : {{mainModel.cc}}
+              <span [style.color]="colorise(model.cc).color">{{colorise(model.cc).value}}</span>
+            </h5>
+          </div>
+          <mat-divider [inset]="true"></mat-divider>
+          <div class="mt-2">
+            <h5>carburant : {{mainModel.carburant.name}}</h5>
+            <h5>transmission : {{mainModel.transmission.name}}</h5>
+            <h5>typeVoiture : {{mainModel.typeVoiture.name}}</h5>
+            <h5>marque : {{mainModel.marque.name}}</h5>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>Ok</button>
+    </mat-card-actions>
+  </mat-card>

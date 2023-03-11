@@ -1,0 +1,14 @@
+<div class="container">
+  <h3 class="mt-5">Models</h3>
+  <!-- {{list | json}} -->
+  <div class="row">
+    <mat-card class="example-card block">
+      <div class="col s12 m4" *ngFor="let o of list; let i = index">
+
+        <mat-card-content class="text-center ml-2 mb-1">
+          <button mat-button color="primary" [routerLink]="['/home/detail', o.id]">Model : {{o.id}}</button>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  </div>
+</div>

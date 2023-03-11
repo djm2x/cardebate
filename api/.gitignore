@@ -19,6 +19,6 @@ bin*
 # db/dev*
 **-shm
 **-wal
-**.zip
+# **t.json
 
 # wwwroot*

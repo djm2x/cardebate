@@ -1,0 +1,93 @@
+<header>
+  <mat-toolbar color="warn" style="height: 50px" class="fixed-top">
+    <button mat-button (click)="snav.toggle()" routerLinkActive="active">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button mat-button class="largeBtn" [routerLink]="['/home']"
+      routerLinkActive="router-link-active">
+      <mat-icon>home</mat-icon>
+    </button>
+    
+    <span class="example-spacer"></span>
+    <ng-container *ngIf="isConnected; else elseTemplate">
+      <button mat-button class="largeBtn" [matMenuTriggerFor]="menu">
+        {{user.fullName}}&nbsp;
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/home/account']" [queryParams]="{ idUser: user.id}"
+          routerLinkActive="active">
+          <!-- skipLocationChange="true" -->
+          <mat-icon>account_box</mat-icon>
+          <span>Mon compte</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item [routerLink]="['/home']" (click)="disconnect()">
+          <mat-icon>clear</mat-icon>
+          <span>Déconnexion</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <button mat-button class="largeBtn" [routerLink]="['/auth']"
+        routerLinkActive="active">
+        <mat-icon>vpn_key</mat-icon>
+      </button>
+    </ng-template>
+    <button mat-button class="largeBtn" [routerLink]="['/account']"
+      routerLinkActive="router-link-active">
+      <mat-icon>dashboard</mat-icon>
+    </button>
+  </mat-toolbar>
+</header>
+<mat-sidenav-container class="example-sidenav-container" style=" height: 100%;">
+  <mat-sidenav #snav [mode]="(!mobileQuery.matches) ? 'side' : 'over'" [opened]="opened && !mobileQuery.matches"
+    [fixedInViewport]="true" fixedTopGap="50" style="box-shadow: 2px 2px 10px 1px rgba(0,0,0,.2);">
+    <mat-nav-list class="list" style="width: 180px; padding: 0;">
+      <mat-divider></mat-divider>
+      <mat-list-item [routerLink]="['/account/dash']" (click)="currentSection = '/account/dash'"
+        [style.background-color]="(currentSection === '/account/dash') ? 'rgba(73, 255, 185, 0.534)' : ''">
+        <i class="fas fa-chart-line icon-size"></i>
+        <span>Dash-board</span>
+        <span style="border-bottom: 5px solid rgba(73, 255, 185, 0.534);"></span>
+      </mat-list-item>
+    </mat-nav-list>
+    <mat-accordion>
+      <mat-expansion-panel expanded="true" class="override">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Data
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <mat-nav-list class="list" style="width: 180px; padding: 0;">
+          <mat-divider></mat-divider>
+
+          <mat-list-item [routerLink]="['/account/add']" (click)="currentSection = '/account/add'"
+            [style.background-color]="(currentSection === '/account/add') ? 'rgba(73, 255, 185, 0.534)' : ''">
+            <i class="fas fa-chart-line icon-size"></i>
+            <span>add advert</span>
+            <span style="border-bottom: 5px solid rgba(73, 255, 185, 0.534);"></span>
+          </mat-list-item>
+          <mat-list-item [routerLink]="['/account/car']" (click)="currentSection = '/account/car'"
+            [style.background-color]="(currentSection === '/account/car') ? 'rgba(73, 255, 185, 0.534)' : ''">
+            <i class="fas fa-chart-line icon-size"></i>
+            <span>my cars</span>
+            <span style="border-bottom: 5px solid rgba(73, 255, 185, 0.534);"></span>
+          </mat-list-item>
+          <mat-list-item [routerLink]="['/account/advert']" (click)="currentSection = '/account/advert'"
+            [style.background-color]="(currentSection === '/account/advert') ? 'rgba(73, 255, 185, 0.534)' : ''">
+            <i class="fas fa-chart-line icon-size"></i>
+            <span>my adverts</span>
+            <span style="border-bottom: 5px solid rgba(73, 255, 185, 0.534);"></span>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <main style="margin-top: 65px;" [@routerTransition]="getState(o)">
+      <router-outlet #o="outlet"></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
